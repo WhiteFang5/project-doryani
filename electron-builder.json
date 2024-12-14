@@ -1,0 +1,46 @@
+{
+	"productName": "project-doryani",
+	"publish": {
+		"provider": "github"
+	},
+	"directories": {
+		"output": "release/"
+	},
+	"files": [
+		"app/*.js",
+		"dist/**/*",
+		"!node_modules/@angular/**/*",
+		"!node_modules/@swimlane/**/*",
+		"!node_modules/rxjs/**/*",
+		"!node_modules/moment/**/*",
+		"!node_modules/zone.js/**/*",
+		"!node_modules/localforage/**/*",
+		"!node_modules/@ngx-translate/**/*",
+		"!node_modules/d3-*/**/*"
+	],
+	"win": {
+		"icon": "dist/favicon.ico",
+		"target": [
+			"nsis",
+			"portable"
+		],
+		"publisherName": [
+			"SignPath Foundation"
+		],
+		"signAndEditExecutable": true
+	},
+	"linux": {
+		"icon": "dist/favicon256x256.png",
+		"target": [
+			"deb",
+			"AppImage"
+		],
+		"category": "Utility"
+	},
+	"nsis": {
+		"allowToChangeInstallationDirectory": true,
+		"perMachine": true,
+		"oneClick": false,
+		"shortcutName": "Project Doryani"
+	}
+}

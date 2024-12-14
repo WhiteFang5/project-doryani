@@ -1,0 +1,18 @@
+<ng-container *ngIf="(userSettings$ | async) as userSettings">
+	<ng-container *ngIf="(gameOverlayBounds$ | async) as gameOverlayBounds">
+		<div class="game-overlay"
+			 [style.left.px]="gameOverlayBounds.x"
+			 [style.top.px]="gameOverlayBounds.y"
+			 [style.width.px]="gameOverlayBounds.width"
+			 [style.height.px]="gameOverlayBounds.height">
+			<div class="version" *ngIf="userSettings.displayVersion">Project Doryani: {{ version$ | async }}</div>
+		</div>
+		<div class="game-overlay"
+			 id="snack-bar-container"
+			 [style.left.px]="gameOverlayBounds.x"
+			 [style.top.px]="gameOverlayBounds.y"
+			 [style.width.px]="gameOverlayBounds.width"
+			 [style.height.px]="gameOverlayBounds.height">
+		</div>
+	</ng-container>
+</ng-container>
