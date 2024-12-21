@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as vars;
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -6,6 +6,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $light-dark-grey;
+  background: vars.$light-dark-grey;
   border-radius: 3px;
 }

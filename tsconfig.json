@@ -23,12 +23,24 @@
 			"node_modules/@types"
 		],
 		"paths": {
-			"@core/*": [ "src/app/core/*" ],
-			"@shared/*": [ "src/app/shared/*" ],
-			"@feature/*": [ "src/app/feature/*" ],
-			"@env/*": [ "src/environments/*" ],
-			"@assets/*": [ "src/assets/*" ],
-			"@ipc-consts": [ "src/ipc-consts/ipc-consts" ]
+			"@core/*": [
+				"src/app/core/*"
+			],
+			"@shared/*": [
+				"src/app/shared/*"
+			],
+			"@feature/*": [
+				"src/app/feature/*"
+			],
+			"@env/*": [
+				"src/environments/*"
+			],
+			"@assets/*": [
+				"src/assets/*"
+			],
+			"@ipc-consts": [
+				"src/ipc-consts/ipc-consts"
+			]
 		}
 	},
 	"exclude": [
@@ -40,5 +52,8 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
+	},
+	"sass": {
+		"quietDeps": true
 	}
 }

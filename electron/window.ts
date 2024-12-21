@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { Rectangle } from 'electron';
-import { addon, windowManager } from 'node-window-manager';
+// import { addon, windowManager } from 'node-window-manager';
 
 export interface Window {
 	processId: number;
@@ -11,7 +11,7 @@ export interface Window {
 }
 
 // macos only - probably not needed for now
-windowManager.requestAccessibility();
+// windowManager.requestAccessibility();
 
 export async function getActiveWindow(): Promise<Window | undefined> {
 	try {
@@ -31,7 +31,8 @@ export async function getActiveWindow(): Promise<Window | undefined> {
 				title: () => active.title,
 			};
 		} else {
-			const active = windowManager.getActiveWindow();
+			const active = {} as any//windowManager.getActiveWindow();
+			const addon = {} as any
 
 			if (!active) {
 				return undefined;
