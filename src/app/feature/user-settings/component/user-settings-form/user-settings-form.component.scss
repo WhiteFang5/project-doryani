@@ -1,22 +1,22 @@
-@import './../../../../../styles/variables';
+@use './../../../../../styles/variables' as vars;
 
 app-card {
 	.card, button {
-		background-color: $settings-grey-one;
+		background-color: vars.$settings-grey-one;
 	}
 
 	.card {
 		height: 100%;
 
 		button {
-			background-color: $settings-grey-two;
+			background-color: vars.$settings-grey-two;
 		}
 	}
 }
 
 label {
 	display: block;
-	color: $label-color;
+	color: vars.$label-color;
 	font-size: 12px;
 	transform: perspective(100px) translateZ(0.001px);
 }
@@ -34,11 +34,11 @@ label {
 }
 
 .warning {
-	color: $orange;
+	color: vars.$orange;
 }
 
 ::ng-deep {
 	.mat-tooltip-lighter {
-		background-color: $settings-grey-two;
+		background-color: vars.$settings-grey-two;
 	}
 }

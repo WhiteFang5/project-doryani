@@ -1,4 +1,4 @@
-@import './../../../styles/variables';
+@use './../../../styles/variables' as vars;
 
 ::ng-deep {
 	::-webkit-scrollbar {
@@ -15,13 +15,13 @@
 }
 
 .version {
-	color: $yellow;
+	color: vars.$yellow;
 	position: absolute;
 	bottom: 2px;
 	left: 2px;
 	font-size: 9px;
 	opacity: 0.5;
-	text-shadow: $black;
+	text-shadow: vars.$black;
 	font-family: FontinSmallCaps;
 	user-select: none;
 }
