@@ -2,10 +2,10 @@
 @use './variables' as vars;
 @use 'sass:color';
 
-@include mat.core();
+// @include mat.core();
 
-$my-typography: mat.m2-define-typography-config();
-@include mat.typography-hierarchy($my-typography);
+// $my-typography: mat.m2-define-typography-config();
+// @include mat.typography-hierarchy($my-typography);
 
 // Foreground Elements
 
@@ -25,6 +25,44 @@ $light-disabled-text: rgba($light-primary-text, 0.5);
 $light-dividers: rgba($light-primary-text, 0.12);
 $light-focused: rgba($light-primary-text, 0.12);
 
+// Background config
+// Light bg
+$light-background: #161616;
+$light-bg-darker-5: darken($light-background, 5%);
+$light-bg-darker-10: darken($light-background, 10%);
+$light-bg-darker-20: darken($light-background, 20%);
+$light-bg-darker-30: darken($light-background, 30%);
+$light-bg-lighter-5: lighten($light-background, 5%);
+$dark-bg-alpha-4: rgba(#161616, 0.04);
+$dark-bg-alpha-12: rgba(#161616, 0.12);
+
+// $mat-light-theme-background: (
+//   background: $light-background,
+//   status-bar: $light-bg-darker-20,
+//   app-bar: $light-bg-darker-5,
+//   hover: $dark-bg-alpha-4,
+//   card: $light-bg-lighter-5,
+//   dialog: $light-bg-lighter-5,
+//   disabled-button: $dark-bg-alpha-12,
+//   raised-button: $light-bg-lighter-5,
+//   focused-button: $dark-focused,
+//   selected-button: $light-bg-darker-20,
+//   selected-disabled-button: $light-bg-darker-30,
+//   disabled-button-toggle: $light-bg-darker-10,
+//   unselected-chip: $light-bg-darker-10,
+//   disabled-list-option: $light-bg-darker-10,
+// );
+
+// Dark bg
+$dark-background: #161616;
+$dark-bg-lighter-5: lighten($dark-background, 5%);
+$dark-bg-lighter-10: lighten($dark-background, 10%);
+$dark-bg-lighter-20: lighten($dark-background, 20%);
+$dark-bg-lighter-30: lighten($dark-background, 30%);
+$light-bg-alpha-4: rgba(#161616, 0.04);
+$light-bg-alpha-12: rgba(#161616, 0.12);
+
+
 // Theme Config
 
 $accent: vars.$purple;
@@ -40,9 +78,14 @@ body {
 	--text-primary-darker-color: #{$dark-primary-text};
 }
 
-$mat-primary: ( main: $accent, lighter: $accent-lighter, darker: $accent-darker, 200: $accent,
-// For slide toggle,
-contrast: (main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ), );
+$mat-primary: (
+	main: $accent,
+	lighter: $accent-lighter,
+	darker: $accent-darker,
+	200: $accent,
+	// For slide toggle,
+	contrast: (main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ),
+);
 $theme-primary: mat.m2-define-palette($mat-primary, main, lighter, darker);
 
 body {
@@ -54,9 +97,14 @@ body {
 	--text-accent-darker-color: #{$dark-primary-text};
 }
 
-$mat-accent: ( main: $accent, lighter: $accent-lighter, darker: $accent-darker, 200: $accent,
-// For slide toggle,
-contrast: (main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ), );
+$mat-accent: (
+	main: $accent,
+	lighter: $accent-lighter,
+	darker: $accent-darker,
+	200: $accent,
+	// For slide toggle,
+	contrast: (main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ),
+);
 $theme-accent: mat.m2-define-palette($mat-accent, main, lighter, darker);
 
 body {
@@ -68,34 +116,47 @@ body {
 	--text-warn-darker-color: #{$light-primary-text};
 }
 
-$mat-warn: ( main: #ff0000, lighter: #ffb3b3, darker: #ff0000, 200: #ff0000,
-// For slide toggle,
-contrast: (main: $light-primary-text, lighter: $dark-primary-text, darker: $light-primary-text, ), );
+$mat-warn: (
+	main: #ff0000,
+	lighter: #ffb3b3,
+	darker: #ff0000,
+	200: #ff0000,
+	// For slide toggle,
+	contrast: (main: $light-primary-text, lighter: $dark-primary-text, darker: $light-primary-text, ),
+);
 $theme-warn: mat.m2-define-palette($mat-warn, main, lighter, darker);
 
-$theme: mat.m2-define-light-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn)));
-$altTheme: mat.m2-define-dark-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn)));
+$altTheme: mat.m2-define-dark-theme((color: (primary: $theme-primary, accent: $theme-accent, warn: $theme-warn), typography: mat.m2-define-typography-config(),
+			density: 0));
 
 // Theme Init
-@include mat.core-theme($theme);
+@include mat.core-theme($altTheme);
+@include mat.all-component-themes($altTheme);
 
-.theme-alternate {
-	@include mat.core-theme($altTheme);
+html {
+	color: $dark-text;
+	font-size: 14px;
+
+	--mdc-elevated-card-container-color: #{$light-bg-lighter-5};
+	--mdc-filled-text-field-container-color: transparent;
+	--mdc-filled-text-field-disabled-container-color: transparent;
+	--mat-select-trigger-text-size: 14px;
+	--mdc-filled-text-field-label-text-size: 14px;
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
 
 // Handle buttons appropriately, with respect to line-height
-.mat-raised-button,
-.mat-stroked-button,
-.mat-flat-button {
+.mat-mdc-raised-button,
+.mat-mdc-stroked-button,
+.mat-mdc-flat-button {
 	padding: 0 1.15em;
 	margin: 0 0.65em;
 	min-width: 3em;
 	line-height: 36.4px;
 }
 
-.mat-standard-chip {
+.mat-mdc-standard-chip {
 	padding: 0.5em 0.85em;
 	min-height: 2.5em;
 }
