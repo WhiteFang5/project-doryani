@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { app, BrowserWindow, ipcMain, Menu, MenuItemConstructorOptions, Rectangle, screen, session, shell, Tray } from 'electron';
+import { app, BrowserWindow, globalShortcut, ipcMain, Menu, MenuItemConstructorOptions, Rectangle, screen, session, shell, Tray } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { IpcChannels } from '../src/ipc-consts/ipc-consts';
@@ -9,6 +9,7 @@ import * as ipcEvents from './ipc-events';
 import { WindowEventForwarder } from './ipc-events';
 import * as log from './log';
 import { State } from './state';
+import * as shortcuts from './shortcuts';
 
 if (!app.requestSingleInstanceLock()) {
 	app.exit();
@@ -47,6 +48,7 @@ interface BrowserChild {
 ipcEvents.register(app, ipcMain, screen, getWindow);
 browserEvents.register(ipcMain, shell, getWindow);
 game.register(serve, ipcMain, getWindow, send);
+shortcuts.register(globalShortcut, ipcMain, send);
 
 /* Main Window */
 function createWindow(): BrowserWindow {

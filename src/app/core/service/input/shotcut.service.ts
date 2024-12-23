@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { ElectronProvider } from '@core/provider';
+import { IpcChannels } from '@ipc-consts';
 import { VisibleFlag } from '@shared/type';
 import { IpcRenderer } from 'electron';
 import { Observable, Subject } from 'rxjs';
@@ -7,7 +8,6 @@ import { Observable, Subject } from 'rxjs';
 export interface Shortcut {
 	accelerator: string;
 	ref: unknown;
-	passive: boolean;
 	actives: VisibleFlag[];
 	callback: Subject<void>;
 	disabled: boolean;
@@ -35,7 +35,6 @@ export class ShortcutService {
 	public add(
 		accelerator: string,
 		ref: unknown,
-		passive = false,
 		...actives: VisibleFlag[]
 	): Observable<void> {
 		if (!this.shortcuts[accelerator]) {
@@ -45,7 +44,6 @@ export class ShortcutService {
 		const shortcut: Shortcut = {
 			accelerator,
 			ref,
-			passive,
 			actives,
 			callback: new Subject<void>(),
 			disabled: false,
@@ -192,27 +190,15 @@ export class ShortcutService {
 
 	private registerShortcut(shortcut: Shortcut): void {
 		shortcut.isActive = true;
-		if (shortcut.passive) {
-			this.ipcRenderer.on(`shortcut-${shortcut.accelerator}`, () => {
-				this.ngZone.run(() => shortcut.callback.next());
-			});
-			this.ipcRenderer.sendSync('register-shortcut', shortcut.accelerator);
-		} else {
-			//TODO
-			/*this.remote.globalShortcut.register(shortcut.accelerator, () => {
-				this.ngZone.run(() => shortcut.callback.next());
-			});*/
-		}
+		this.ipcRenderer.on(`${IpcChannels.ShortcutPrefix}${shortcut.accelerator}`, () => {
+			this.ngZone.run(() => shortcut.callback.next());
+		});
+		this.ipcRenderer.sendSync(IpcChannels.RegisterShortcut, shortcut.accelerator);
 	}
 
 	private unregisterShortcut(shortcut: Shortcut): void {
 		shortcut.isActive = false;
-		if (shortcut.passive) {
-			this.ipcRenderer.removeAllListeners(`shortcut-${shortcut.accelerator}`);
-			this.ipcRenderer.sendSync('unregister-shortcut', shortcut.accelerator);
-		} else {
-			//TODO
-			//this.remote.globalShortcut.unregister(shortcut.accelerator);
-		}
+		this.ipcRenderer.removeAllListeners(`${IpcChannels.ShortcutPrefix}${shortcut.accelerator}`);
+		this.ipcRenderer.sendSync(IpcChannels.UnregisterShortcut, shortcut.accelerator);
 	}
 }

@@ -154,12 +154,10 @@ export class OverlayComponent implements OnInit, OnDestroy {
 			.visibleChange()
 			.pipe(
 				tap((flag) => this.shortcut.check(flag)),
-				tap((flag) => console.log(`flag: ${flag}`)),
 				map((flag) => flag !== VisibleFlag.None),
 				debounce(() => timer(1500)),
 				distinctUntilChanged()
 			).subscribe((show) => {
-				console.log(`show? ${show}`);
 				if (show) {
 					this.window.show();
 				} else {
@@ -186,7 +184,6 @@ export class OverlayComponent implements OnInit, OnDestroy {
 						.add(
 							feature.accelerator,
 							OverlayCompRef,
-							!!feature.passive,
 							VisibleFlag.Game,
 							VisibleFlag.Overlay
 						)
@@ -204,7 +201,6 @@ export class OverlayComponent implements OnInit, OnDestroy {
 				.add(
 					settings.openUserSettingsKeybinding,
 					OverlayCompRef,
-					false,
 					VisibleFlag.Game,
 					VisibleFlag.Overlay
 				)
@@ -215,7 +211,6 @@ export class OverlayComponent implements OnInit, OnDestroy {
 				.add(
 					settings.exitAppKeybinding,
 					OverlayCompRef,
-					false,
 					VisibleFlag.Game,
 					VisibleFlag.Overlay
 				)

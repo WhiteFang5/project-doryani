@@ -31,6 +31,10 @@ export namespace IpcChannels {
 	export const ShowUserSettings = "show-user-settings";
 	export const UserSettingsChanged = "user-settings-changed";
 
+	export const RegisterShortcut = 'register-shortcut';
+	export const UnregisterShortcut = 'unregister-shortcut';
+	export const ShortcutPrefix = 'shortcut-';
+
 	// Electron App/Screen/Window Events
 	export const SetIgnoreMouseEvents = "set-ignore-mouse-events";
 	export const GetCursorScreenPoint = "get-cursor-screen-point";
