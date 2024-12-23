@@ -87,8 +87,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
 	private init(): void {
 		this.settingsService.init(this.modules).subscribe((settings) => {
-			this.translate.use(settings.uiLanguage || DEFAULT_USER_SETTINGS.uiLanguage!);
-			this.window.setZoom((settings.zoom || DEFAULT_USER_SETTINGS.zoom!) / 100);
+			this.translate.use(settings.uiLanguage!);
+			this.window.setZoom((settings.zoom!) / 100);
 
 			this.context.init(this.getContext(settings)).subscribe(() => {
 				this.accountService.register(settings).subscribe(() => {
@@ -124,7 +124,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 
 	private getContext(settings: UserSettings): Context {
 		return {
-			language: settings.language || DEFAULT_USER_SETTINGS.language!,
+			language: settings.language!,
 			gameLanguage: settings.gameLanguage,
 			leagueId: settings.leagueId,
 		};

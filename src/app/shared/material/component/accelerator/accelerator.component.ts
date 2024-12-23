@@ -16,13 +16,13 @@ export class AcceleratorComponent {
 	public label!: string;
 
 	@Input()
-	public value!: string;
+	public value: string | undefined;
 
 	@Output()
-	public valueChange = new EventEmitter<string>();
+	public valueChange = new EventEmitter<string | undefined>();
 
 	public recording = false;
-	public valueBackup = '';
+	public valueBackup: string | undefined;
 
 	public onKeyboardClick(el: HTMLElement): void {
 		this.recording = true;
@@ -100,7 +100,7 @@ export class AcceleratorComponent {
 				}
 			} else if (key === 'Esc' || key === 'Escape') {
 				this.recording = false;
-				this.value = '';
+				this.value = undefined;
 				this.valueChange.next(this.value);
 			} else {
 				this.value = 'material.accelerator.any';

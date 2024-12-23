@@ -1,8 +1,8 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    HostListener, Inject, OnDestroy,
-    OnInit
+	ChangeDetectionStrategy,
+	Component,
+	HostListener, Inject, OnDestroy,
+	OnInit
 } from '@angular/core';
 import { AppService, AppTranslateService, ElectronService, WindowService } from '@core/service';
 import { ShortcutService } from '@core/service/input';
@@ -75,16 +75,16 @@ export class OverlayComponent implements OnInit, OnDestroy {
 				next: (settings) => {
 					this.userSettingsOpen = undefined;
 
-					this.translate.use(settings.uiLanguage || DEFAULT_USER_SETTINGS.uiLanguage!);
-					this.window.setZoom((settings.zoom || DEFAULT_USER_SETTINGS.zoom!) / 100);
+					this.translate.use(settings.uiLanguage!);
+					this.window.setZoom((settings.zoom!) / 100);
 					this.context.update(this.getContext(settings));
 					this.accountService.register(settings).subscribe(() => {
-						this.app.updateAutoDownload(settings.autoDownload || DEFAULT_USER_SETTINGS.autoDownload!);
+						this.app.updateAutoDownload(settings.autoDownload!);
 						this.register(settings);
 						this.app.triggerVisibleChange();
 					});
 				},
-				error: () => (this.userSettingsOpen = undefined),
+				error: () => this.userSettingsOpen = undefined,
 			});
 			this.reset();
 		} else {
@@ -96,8 +96,8 @@ export class OverlayComponent implements OnInit, OnDestroy {
 
 	private initSettings(): void {
 		this.userSettingsService.init(this.modules).subscribe((settings) => {
-			this.translate.use(settings.uiLanguage || DEFAULT_USER_SETTINGS.uiLanguage!);
-			this.window.setZoom((settings.zoom || DEFAULT_USER_SETTINGS.zoom!) / 100);
+			this.translate.use(settings.uiLanguage!);
+			this.window.setZoom((settings.zoom!) / 100);
 
 			this.context.init(this.getContext(settings)).subscribe(() => {
 				this.accountService.register(settings).subscribe(() => {
@@ -115,7 +115,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 								return x;
 							})
 							.subscribe((x) => {
-								this.window.setZoom((x.zoom || DEFAULT_USER_SETTINGS.zoom!) / 100);
+								this.window.setZoom((x.zoom!) / 100);
 							});
 					});
 				});
@@ -145,7 +145,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 					break;
 			}
 		});
-		this.app.registerEvents(settings.autoDownload || DEFAULT_USER_SETTINGS.autoDownload!);
+		this.app.registerEvents(settings.autoDownload!);
 		this.window.registerEvents();
 	}
 
@@ -225,7 +225,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 
 	private getContext(settings: UserSettings): Context {
 		return {
-			language: settings.language || DEFAULT_USER_SETTINGS.language!,
+			language: settings.language!,
 			gameLanguage: settings.gameLanguage,
 			leagueId: settings.leagueId,
 		};

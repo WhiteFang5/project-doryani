@@ -32,7 +32,7 @@ export class BookmarkSettingsComponent implements UserSettingsComponent {
 		(this.input.nativeElement as HTMLInputElement).click();
 	}
 
-	public onFileSelected(event: InputEvent): void {
+	public onFileSelected(event: Event): void {
 		const path = (event.target as HTMLInputElement)?.files?.item(0)?.path;
 		this.settings.bookmarks.push({
 			url: `file:///${path}`,
@@ -47,7 +47,7 @@ export class BookmarkSettingsComponent implements UserSettingsComponent {
 
 	private addBookmark(): void {
 		this.settings.bookmarks.push({
-			url: 'https://github.com/PoE-Overlay-Community/PoE-Overlay-Community-Fork',
+			url: 'https://github.com/WhiteFang5/project-doryani',
 			shortcut: undefined,
 			external: false,
 		});
