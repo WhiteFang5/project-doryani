@@ -27,6 +27,10 @@ export namespace IpcChannels {
 	export const BrowserRetrieve = "browser-retrieve";
 	export const BrowserOpenAndWait = "browser-open-and-wait";
 	export const BrowserOpen = "browser-open";
+	export const BrowserClose = "browser-close";
+	export const BrowserMinimized = "browser-minimized";
+	export const BrowserRestored = "browser-restored";
+	export const BrowserClosed = "browser-closed";
 
 	export const ShowUserSettings = "show-user-settings";
 	export const UserSettingsChanged = "user-settings-changed";

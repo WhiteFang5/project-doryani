@@ -1,9 +1,11 @@
 import { BrowserWindow, IpcMain, Shell } from 'electron';
-import { GetMainWindowDelegate } from 'electron/types';
 import { APP_CONFIG } from '../src/environments/environment';
 import { IpcChannels } from '../src/ipc-consts/ipc-consts';
+import { GetMainWindowDelegate, SendIpcDelegate } from './types';
 
-export function register(ipcMain: IpcMain, shell: Shell, getMainWindow: GetMainWindowDelegate): void {
+const children: Record<string, BrowserWindow | null> = {};
+
+export function register(ipcMain: IpcMain, shell: Shell, getMainWindow: GetMainWindowDelegate, send: SendIpcDelegate): void {
 	ipcMain.handle(IpcChannels.BrowserRetrieve, (event, url: string) => {
 		return new Promise((resolve) => {
 			const parent = getMainWindow() || undefined;
@@ -52,9 +54,15 @@ export function register(ipcMain: IpcMain, shell: Shell, getMainWindow: GetMainW
 		});
 	});
 
+	ipcMain.on(IpcChannels.BrowserClose, (event, id: string) => {
+		children[id]?.close();
+	});
+
 	ipcMain.on(IpcChannels.BrowserOpen, (event, url: string, external: boolean) => {
 		if (external) {
 			shell.openExternal(url);
+
+			event.returnValue = true;
 		} else {
 			const parent = getMainWindow();
 			if (!parent) {
@@ -62,6 +70,8 @@ export function register(ipcMain: IpcMain, shell: Shell, getMainWindow: GetMainW
 				return;
 			}
 			const [width, height] = parent.getSize();
+
+			const id = Date.now().toString(16);
 
 			const win = new BrowserWindow({
 				center: true,
@@ -72,29 +82,34 @@ export function register(ipcMain: IpcMain, shell: Shell, getMainWindow: GetMainW
 				backgroundColor: url.startsWith('file://') ? '#FCFCFC' : '#0F0F0F',
 				show: false,
 			});
+			children[id] = win;
 
 			setupCookieSharing(win);
 			parent.setEnabled(false);
 			win.on('minimize', () => {
 				parent.setEnabled(true);
+				send(IpcChannels.BrowserMinimized, id);
 			});
 			const restore = () => {
 				parent.setEnabled(false);
+				send(IpcChannels.BrowserRestored, id);
 			};
 			win.on('restore', () => restore());
 			win.on('maximize', () => restore());
 			win.once('closed', () => {
+				children[id] = null;
 				parent.setEnabled(true);
 				parent.moveTop();
+				send(IpcChannels.BrowserClosed, id);
 			});
 			win.once('ready-to-show', () => {
 				win.webContents.zoomFactor = parent.webContents.zoomFactor;
 				win.show();
 			});
 			win.loadURL(url);
-		}
 
-		event.returnValue = true;
+			event.returnValue = id;
+		}
 	});
 }
 

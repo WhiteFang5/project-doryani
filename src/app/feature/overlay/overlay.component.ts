@@ -5,6 +5,7 @@ import {
     OnInit
 } from '@angular/core';
 import { AppService, AppTranslateService, ElectronService, WindowService } from '@core/service';
+import { DialogRefService } from '@core/service/dialog';
 import { ShortcutService } from '@core/service/input';
 import { FEATURES_TOKEN } from '@core/token';
 import { UserSettingsService } from '@feature/user-settings/service';
@@ -44,6 +45,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 		private readonly electronService: ElectronService,
 		private readonly shortcut: ShortcutService,
 		private readonly accountService: PoEAccountService,
+		private readonly dialogRef: DialogRefService,
 	) {
 		this.gameOverlayBounds$ = new BehaviorSubject<Rectangle>(this.window.getOffsettedGameBounds());
 		this.window.gameBounds.subscribe(() => {
@@ -124,7 +126,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 	}
 
 	private reset(): void {
-		//this.dialogRef.reset();
+		this.dialogRef.reset();
 		this.accountService.unregister();
 		//this.stashService.unregister();
 		//this.vendorRecipeService.unregister();
@@ -170,6 +172,7 @@ export class OverlayComponent implements OnInit, OnDestroy {
 	private register(settings: UserSettings): void {
 		this.registerFeatures(settings);
 		this.registerSettings(settings);
+		this.dialogRef.register();
 
 		this.userSettings$.next(settings);
 		this.electronService.send(IpcChannels.UserSettingsChanged);

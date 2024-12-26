@@ -1,6 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { ElectronProvider } from '@core/provider';
+import { DialogRefService } from '@core/service/dialog';
 import { IpcChannels } from '@ipc-consts';
+import { DialogType } from '@shared/type';
 import { AppUpdateState, VisibleFlag } from '@shared/type/app.type';
 import { IpcRenderer } from 'electron';
 import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
@@ -19,6 +21,7 @@ export class AppService {
 
 	constructor(
 		private readonly ngZone: NgZone,
+		private readonly dialogRef: DialogRefService,
 		electronProvider: ElectronProvider
 	) {
 		this.ipcRenderer = electronProvider.provideIpcRenderer();
@@ -63,14 +66,29 @@ export class AppService {
 		return combineLatest([
 			this.activeChange$,
 			this.focusChange$,
+			this.dialogRef.dialogsChange(),
 		]).pipe(
-			map(([game, focus]) => {
+			map(([game, focus, dialogs]) => {
 				let result = VisibleFlag.None;
 				if (game) {
 					result |= VisibleFlag.Game;
 				}
 				if (focus) {
 					result |= VisibleFlag.Overlay;
+				}
+
+				if (dialogs.length > 0) {
+					const dialog = dialogs[dialogs.length - 1];
+					switch (dialog.type) {
+						case DialogType.Dialog:
+							result |= VisibleFlag.Dialog;
+							break;
+						case DialogType.Browser:
+							result |= VisibleFlag.Browser;
+							break;
+						default:
+							break;
+					}
 				}
 				return result;
 			})

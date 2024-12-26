@@ -47,7 +47,7 @@ interface BrowserChild {
 
 /* Register Listeners */
 ipcEvents.register(app, ipcMain, screen, clipboard, getWindow);
-browserEvents.register(ipcMain, shell, getWindow);
+browserEvents.register(ipcMain, shell, getWindow, send);
 game.register(serve, ipcMain, getWindow, send);
 shortcuts.register(globalShortcut, ipcMain, send);
 

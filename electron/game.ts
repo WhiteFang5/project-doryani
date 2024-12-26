@@ -102,7 +102,20 @@ export function register(serve: boolean, ipcMain: IpcMain, getMainWindow: GetMai
 	const game = new Game((logLine) => send(IpcChannels.GameLogLine, logLine));
 
 	ipcMain.on(IpcChannels.GameFocus, (event) => {
+		const win = getMainWindow();
+		if (!win) {
+			event.returnValue = false;
+			return;
+		}
+
+		win.setAlwaysOnTop(false);
+		win.setVisibleOnAllWorkspaces(false);
+
 		game.focus();
+
+		win.setAlwaysOnTop(true, 'pop-up-menu', 1);
+		win.setVisibleOnAllWorkspaces(true);
+
 		event.returnValue = true;
 	});
 

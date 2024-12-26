@@ -3,6 +3,7 @@ export * from './audioclip.type';
 export * from './cache.type';
 export * from './context.type';
 export * from './currency.type';
+export * from './dialog.type';
 export * from './feature.type';
 export * from './item.type';
 export * from './keycode.type';

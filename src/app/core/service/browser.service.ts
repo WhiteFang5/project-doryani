@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ElectronProvider } from '@core/provider';
+import { DialogRefService } from '@core/service/dialog';
 import { IpcChannels } from '@ipc-consts';
+import { Dialog, DialogType } from '@shared/type';
 import { IpcRenderer } from 'electron';
+import { IpcRendererEvent } from 'electron/main';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -11,6 +14,7 @@ export class BrowserService {
 	private readonly electron: IpcRenderer;
 
 	constructor(
+		private readonly dialogRef: DialogRefService,
 		electronProvider: ElectronProvider
 	) {
 		this.electron = electronProvider.provideIpcRenderer();
@@ -35,6 +39,39 @@ export class BrowserService {
 	}
 
 	public open(url: string, external = false): void {
-		this.electron.send(IpcChannels.BrowserOpen, url, external);
+		const windowId = this.electron.sendSync(IpcChannels.BrowserOpen, url, external);
+
+		if (!external) {
+			const dialog: Dialog = {
+				close: () => this.electron.send(IpcChannels.BrowserClose, windowId),
+				type: DialogType.Browser,
+			};
+
+			this.dialogRef.add(dialog);
+
+			const scopedMinimized = (event: IpcRendererEvent, id: string) => {
+				if (id === windowId) {
+					this.dialogRef.remove(dialog);
+				}
+			};
+
+			const scopedRestored = (event: IpcRendererEvent, id: string) => {
+				if (id === windowId) {
+					this.dialogRef.remove(dialog);
+					this.dialogRef.add(dialog);
+				}
+			};
+
+			this.electron.on(IpcChannels.BrowserMinimized, scopedMinimized);
+			this.electron.on(IpcChannels.BrowserRestored, scopedRestored);
+
+			this.electron.once(IpcChannels.BrowserClosed, (event, id: string) => {
+				if (id === windowId) {
+					this.electron.off(IpcChannels.BrowserMinimized, scopedMinimized);
+					this.electron.off(IpcChannels.BrowserRestored, scopedRestored);
+					this.dialogRef.remove(dialog);
+				}
+			});
+		}
 	}
 }
