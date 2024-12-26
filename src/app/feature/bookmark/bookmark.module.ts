@@ -43,7 +43,7 @@ export class BookmarkModule implements FeatureModule {
 			.map((bookmark, index) => {
 				const feature: Feature = {
 					name: `bookmark-${index}`,
-					accelerator: bookmark.shortcut!,
+					accelerator: bookmark.shortcut,
 				};
 				return feature;
 			});

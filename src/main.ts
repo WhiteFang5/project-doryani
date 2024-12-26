@@ -1,6 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { Routes, provideRouter, withHashLocation } from '@angular/router';
 import { BookmarkModule } from '@feature/bookmark/bookmark.module';
 import { OverlayComponent } from '@feature/overlay/overlay.component';
@@ -9,8 +10,7 @@ import { TranslateLoader, provideTranslateService } from '@ngx-translate/core';
 import { AppTranslationsLoader } from './app/app-translations.loader';
 import { AppComponent } from './app/app.component';
 import { APP_CONFIG } from './environments/environment';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { CommandModule } from '@feature/command/command.module';
 
 const routes: Routes = [
 	{
@@ -24,10 +24,10 @@ const routes: Routes = [
 ];
 
 if (APP_CONFIG.production) {
-	console.log('Running in production mode.');
+	console.info('Running in production mode.');
 	enableProdMode();
 } else {
-	console.log('Running in development mode.');
+	console.info('Running in development mode.');
 }
 
 bootstrapApplication(AppComponent, {
@@ -46,6 +46,6 @@ bootstrapApplication(AppComponent, {
 		provideAnimations(),
 
 		// Features (Modules)
-		importProvidersFrom([BookmarkModule]),
+		importProvidersFrom([BookmarkModule, CommandModule]),
 	]
 }).catch(err => console.error(err));

@@ -3,7 +3,7 @@ import { UserSettings } from "@shared/type/user-settings.type";
 
 export interface Feature {
 	name: string;
-	accelerator: string;
+	accelerator: string | undefined;
 }
 
 export interface FeatureModule {

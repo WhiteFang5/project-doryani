@@ -1,8 +1,8 @@
 import {
-	ChangeDetectionStrategy,
-	Component,
-	HostListener, Inject, OnDestroy,
-	OnInit
+    ChangeDetectionStrategy,
+    Component,
+    HostListener, Inject, OnDestroy,
+    OnInit
 } from '@angular/core';
 import { AppService, AppTranslateService, ElectronService, WindowService } from '@core/service';
 import { ShortcutService } from '@core/service/input';
@@ -13,7 +13,7 @@ import { SnackBarService } from '@shared/material/service';
 import { PoEAccountService } from '@shared/poe-account/service/poe-account.service';
 import { ContextService } from '@shared/service';
 import { SharedModule } from '@shared/shared.module';
-import { AppUpdateState, Context, DEFAULT_USER_SETTINGS, FeatureModule, Rectangle, UserSettings, VisibleFlag } from '@shared/type';
+import { AppUpdateState, Context, FeatureModule, Rectangle, UserSettings, VisibleFlag } from '@shared/type';
 import { BehaviorSubject, Observable, debounce, distinctUntilChanged, map, mergeMap, tap, timer } from 'rxjs';
 
 const OverlayCompRef = 'overlay-component';

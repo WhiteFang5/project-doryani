@@ -35,6 +35,12 @@ export namespace IpcChannels {
 	export const UnregisterShortcut = 'unregister-shortcut';
 	export const ShortcutPrefix = 'shortcut-';
 
+	// Input related events
+	export const GetClipboard = "get-clipboard";
+	export const SetClipboard = "set-clipboard";
+	export const KeyTap = "key-tap";
+	export const KeyToggle = "key-toggle";
+
 	// Electron App/Screen/Window Events
 	export const SetIgnoreMouseEvents = "set-ignore-mouse-events";
 	export const GetCursorScreenPoint = "get-cursor-screen-point";

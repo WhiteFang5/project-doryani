@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { app, BrowserWindow, globalShortcut, ipcMain, Menu, MenuItemConstructorOptions, Rectangle, screen, session, shell, Tray } from 'electron';
+import { app, BrowserWindow, clipboard, globalShortcut, ipcMain, Menu, MenuItemConstructorOptions, Rectangle, screen, session, shell, Tray } from 'electron';
 import * as path from 'path';
+import { uIOhook } from 'uiohook-napi';
 import * as url from 'url';
 import { IpcChannels } from '../src/ipc-consts/ipc-consts';
 import * as browserEvents from './browser-events';
@@ -8,8 +9,8 @@ import * as game from './game';
 import * as ipcEvents from './ipc-events';
 import { WindowEventForwarder } from './ipc-events';
 import * as log from './log';
-import { State } from './state';
 import * as shortcuts from './shortcuts';
+import { State } from './state';
 
 if (!app.requestSingleInstanceLock()) {
 	app.exit();
@@ -45,7 +46,7 @@ interface BrowserChild {
 }
 
 /* Register Listeners */
-ipcEvents.register(app, ipcMain, screen, getWindow);
+ipcEvents.register(app, ipcMain, screen, clipboard, getWindow);
 browserEvents.register(ipcMain, shell, getWindow);
 game.register(serve, ipcMain, getWindow, send);
 shortcuts.register(globalShortcut, ipcMain, send);
@@ -329,6 +330,7 @@ try {
 	app.on('ready', () => {
 		/* delay create window in order to support transparent windows at linux. */
 		setTimeout(() => {
+			uIOhook.start();
 			createWindow();
 			createTray();
 		}, 300);

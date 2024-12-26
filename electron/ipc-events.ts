@@ -1,12 +1,13 @@
 import {
     App,
     BrowserWindow,
+    Clipboard,
     IpcMain,
     Screen,
 } from 'electron';
 import { IpcChannels } from '../src/ipc-consts/ipc-consts';
 
-export function register(app: App, ipcMain: IpcMain, screen: Screen, getMainWindow: () => BrowserWindow | null): void {
+export function register(app: App, ipcMain: IpcMain, screen: Screen, clipboard: Clipboard, getMainWindow: () => BrowserWindow | null): void {
 	ipcMain.on(IpcChannels.AppVersion, (event) => {
 		event.returnValue = app.getVersion();
 	});
@@ -84,6 +85,15 @@ export function register(app: App, ipcMain: IpcMain, screen: Screen, getMainWind
 			return;
 		}
 		win.setSkipTaskbar(skipTaskbar);
+		event.returnValue = true;
+	});
+
+	ipcMain.on(IpcChannels.GetClipboard, (event) => {
+		event.returnValue = clipboard.readText();
+	});
+
+	ipcMain.on(IpcChannels.SetClipboard, (event, text: string) => {
+		clipboard.writeText(text);
 		event.returnValue = true;
 	});
 
