@@ -2,11 +2,6 @@
 @use './variables' as vars;
 @use 'sass:color';
 
-// @include mat.core();
-
-// $my-typography: mat.m2-define-typography-config();
-// @include mat.typography-hierarchy($my-typography);
-
 // Foreground Elements
 
 // Light Theme Text
@@ -28,39 +23,18 @@ $light-focused: rgba($light-primary-text, 0.12);
 // Background config
 // Light bg
 $light-background: #161616;
-$light-bg-darker-5: darken($light-background, 5%);
-$light-bg-darker-10: darken($light-background, 10%);
-$light-bg-darker-20: darken($light-background, 20%);
-$light-bg-darker-30: darken($light-background, 30%);
-$light-bg-lighter-5: lighten($light-background, 5%);
-$dark-bg-alpha-4: rgba(#161616, 0.04);
-$dark-bg-alpha-12: rgba(#161616, 0.12);
-
-// $mat-light-theme-background: (
-//   background: $light-background,
-//   status-bar: $light-bg-darker-20,
-//   app-bar: $light-bg-darker-5,
-//   hover: $dark-bg-alpha-4,
-//   card: $light-bg-lighter-5,
-//   dialog: $light-bg-lighter-5,
-//   disabled-button: $dark-bg-alpha-12,
-//   raised-button: $light-bg-lighter-5,
-//   focused-button: $dark-focused,
-//   selected-button: $light-bg-darker-20,
-//   selected-disabled-button: $light-bg-darker-30,
-//   disabled-button-toggle: $light-bg-darker-10,
-//   unselected-chip: $light-bg-darker-10,
-//   disabled-list-option: $light-bg-darker-10,
-// );
+$light-bg-darker-5: color.adjust($light-background, $lightness: -5%);
+$light-bg-darker-10: color.adjust($light-background, $lightness: -10%);
+$light-bg-darker-20: color.adjust($light-background, $lightness: -20%);
+$light-bg-darker-30: color.adjust($light-background, $lightness: -30%);
+$light-bg-lighter-5: color.adjust($light-background, $lightness: 5%);
 
 // Dark bg
 $dark-background: #161616;
-$dark-bg-lighter-5: lighten($dark-background, 5%);
-$dark-bg-lighter-10: lighten($dark-background, 10%);
-$dark-bg-lighter-20: lighten($dark-background, 20%);
-$dark-bg-lighter-30: lighten($dark-background, 30%);
-$light-bg-alpha-4: rgba(#161616, 0.04);
-$light-bg-alpha-12: rgba(#161616, 0.12);
+$dark-bg-lighter-5: color.adjust($dark-background, $lightness: 5%);
+$dark-bg-lighter-10: color.adjust($dark-background, $lightness: 10%);
+$dark-bg-lighter-20: color.adjust($dark-background, $lightness: 20%);
+$dark-bg-lighter-30: color.adjust($dark-background, $lightness: 30%);
 
 
 // Theme Config
