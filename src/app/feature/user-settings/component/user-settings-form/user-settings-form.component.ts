@@ -135,14 +135,6 @@ export class UserSettingsFormComponent implements OnInit, OnDestroy {
 		this.window.setZoom(this.settings.zoom! / 100);
 	}
 
-	public relaunchApp(): void {
-		this.app.quit(true);
-	}
-
-	public exitApp(): void {
-		this.app.quit(false);
-	}
-
 	public onLoginClick(): void {
 		this.accountService.login(this.settings.language).subscribe((account) => {
 			this.onAccountChanged(account, true);

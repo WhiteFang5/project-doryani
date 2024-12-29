@@ -6,7 +6,7 @@
 		   (keydown)="onKeydown($event)"
 		   #input />
 	<button matSuffix
-			mat-button
+			mat-icon-button
 			(click)="onKeyboardClick(input)"
 			[matTooltip]="'material.accelerator.set-shortcut' | translate"
 			*ngIf="!recording; else cancel">

@@ -43,7 +43,7 @@
 								<mat-form-field floatLabel="always">
 									<mat-label>{{ 'settings.character-update-interval' | translate }}</mat-label>
 									<mat-select [(value)]="settings.charactersCacheExpiration"
-										placeholder="{{ getDefaultIntervalLabel(defaultCharacterUpdateInterval) }}">
+												placeholder="{{ getDefaultIntervalLabel(defaultCharacterUpdateInterval) }}">
 										<mat-option>{{ getDefaultIntervalLabel(defaultCharacterUpdateInterval)
 											}}</mat-option>
 										<mat-option *ngFor="let intervals of updateIntervals" [value]="intervals.value">
@@ -68,18 +68,18 @@
 										</span>
 									</mat-label>
 									<mat-select [(value)]="settings.activeCharacterName"
-										placeholder="({{ (activeCharacter$ | async)!.name }})"
-										matTooltip="{{ settings.activeCharacterName ? '' : 'settings.auto-selected-desc' | translate }}">
+												placeholder="({{ (activeCharacter$ | async)!.name }})"
+												matTooltip="{{ settings.activeCharacterName ? '' : 'settings.auto-selected-desc' | translate }}">
 										<mat-option [matTooltip]="getCharacterSelectLabel(activeCharacter$.value)"
-											matTooltipClass="mat-tooltip-lighter" matTooltipPosition="right">{{
+													matTooltipClass="mat-tooltip-lighter" matTooltipPosition="right">{{
 											'settings.auto-select' | translate }}</mat-option>
 										<mat-optgroup *ngFor="let leagueId of characterLeagues$ | async"
-											label="{{ leagueId }} {{ 'settings.league' | translate }}">
-											<mat-option
-												*ngFor="let character of getCharacterInLeague(account.characters || [], leagueId)"
-												[value]="character.name"
-												[matTooltip]="getCharacterSelectLabel(character)"
-												matTooltipClass="mat-tooltip-lighter" matTooltipPosition="right">
+													  label="{{ leagueId }} {{ 'settings.league' | translate }}">
+											<mat-option *ngFor="let character of getCharacterInLeague(account.characters || [], leagueId)"
+														[value]="character.name"
+														[matTooltip]="getCharacterSelectLabel(character)"
+														matTooltipClass="mat-tooltip-lighter"
+														matTooltipPosition="right">
 												{{ getCharacterSelectLabel(character) }}
 											</mat-option>
 										</mat-optgroup>
@@ -167,7 +167,7 @@
 				<div class="slider">
 					<span>60%</span>
 					<mat-slider min="0.6" max="1" step="0.1" tickInterval="1" [displayWith]="displayWithOpacity"
-						discrete>
+								discrete>
 						<input matSliderThumb [(value)]="settings.dialogOpacity!">
 					</mat-slider>
 					<span>100%</span>
@@ -190,7 +190,7 @@
 				{{ 'settings.auto-download' | translate }}
 			</mat-slide-toggle>
 			<mat-slide-toggle [title]="'settings.focusable-description' | translate" [checked]="settings.focusable"
-				(change)="settings.focusable = $event.checked">
+							  (change)="settings.focusable = $event.checked">
 				{{ 'settings.focusable' | translate }}
 			</mat-slide-toggle>
 			<mat-form-field>
@@ -212,30 +212,10 @@
 				</mat-select>
 			</mat-form-field>
 			<app-accelerator [label]="'settings.open-settings' | translate"
-				[(value)]="settings.openUserSettingsKeybinding">
+							 [(value)]="settings.openUserSettingsKeybinding">
 			</app-accelerator>
 			<app-accelerator [label]="'settings.exit-app' | translate" [(value)]="settings.exitAppKeybinding">
 			</app-accelerator>
 		</mat-card-content>
 	</mat-card>
-	<app-card>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-2">
-				<div align="center">
-					<button mat-raised-button (click)="relaunchApp()">
-						{{ 'settings.relaunch-app' | translate }}
-					</button>
-				</div>
-			</div>
-			<div class="col-md-2">
-				<div align="center">
-					<button mat-raised-button (click)="exitApp()">
-						{{ 'settings.exit-app' | translate }}
-					</button>
-				</div>
-			</div>
-			<div class="col-md-4"></div>
-		</div>
-	</app-card>
 </ng-container>
