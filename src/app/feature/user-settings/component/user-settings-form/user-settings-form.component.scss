@@ -1,5 +1,11 @@
 @use './../../../../../styles/variables' as vars;
 
+:host {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
 .user-settings-login {
 	display: flex;
 	gap: 32px;

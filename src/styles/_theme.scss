@@ -162,4 +162,8 @@ html {
 	selected-focus-track-color: #{$accent-lighter},
 	selected-pressed-track-color: #{$accent-lighter},
   ));
+
+  @include mat.tooltip-overrides((
+	supporting-text-size: 12px,
+  ));
 }

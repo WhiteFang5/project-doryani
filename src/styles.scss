@@ -76,49 +76,6 @@ body {
 	width: 100%;
 }
 
-mat-label {
-	display: block;
-}
-
-mat-card {
-	margin-bottom: 12px;
-
-	>mat-label {
-		margin-bottom: 12px;
-	}
-
-}
-
 .tooltip-val {
 	padding: 2px !important;
-}
-
-.mat-mdc-progress-bar {
-	>.mat-mdc-progress-bar-background {
-		fill: none;
-	}
-
-	>.mat-mdc-progress-bar-buffer {
-		background: none;
-	}
-
-}
-
-.mat-mdc-tooltip {
-	background-color: rgb(35, 35, 35);
-	font-size: 14px;
-	white-space: pre-line;
-
-	&.width-400 {
-		max-width: 400px;
-	}
-
-	&.width-500 {
-		max-width: 500px;
-	}
-
-	&.width-600 {
-		max-width: 600px;
-	}
-
 }
