@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BookmarkUserSettings } from '@feature/bookmark/type/bookmark.type';
 import { UserSettingsComponent } from '@shared/type';
 
@@ -17,19 +17,12 @@ export class BookmarkSettingsComponent implements UserSettingsComponent {
 	@Input()
 	public defaultSettings!: BookmarkUserSettings;
 
-	@ViewChild('ghostInput')
-	public input!: ElementRef;
-
 	public load(): void {
 		// stub
 	}
 
 	public onAddClick(): void {
 		this.addBookmark();
-	}
-
-	public onAddFileClick(): void {
-		(this.input.nativeElement as HTMLInputElement).click();
 	}
 
 	public onFileSelected(event: Event): void {
