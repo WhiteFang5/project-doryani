@@ -189,6 +189,9 @@ export class ShortcutService {
 	}
 
 	private registerShortcut(shortcut: Shortcut): void {
+		if (shortcut.isActive) {
+			return;
+		}
 		shortcut.isActive = true;
 		this.ipcRenderer.on(`${IpcChannels.ShortcutPrefix}${shortcut.accelerator}`, () => {
 			this.ngZone.run(() => shortcut.callback.next());
@@ -197,6 +200,9 @@ export class ShortcutService {
 	}
 
 	private unregisterShortcut(shortcut: Shortcut): void {
+		if (!shortcut.isActive) {
+			return;
+		}
 		shortcut.isActive = false;
 		this.ipcRenderer.removeAllListeners(`${IpcChannels.ShortcutPrefix}${shortcut.accelerator}`);
 		this.ipcRenderer.sendSync(IpcChannels.UnregisterShortcut, shortcut.accelerator);

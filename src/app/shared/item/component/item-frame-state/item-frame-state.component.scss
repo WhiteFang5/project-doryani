@@ -1,0 +1,19 @@
+@use './../../../../../styles/variables' as vars;
+
+.item-frame-state {
+	display: block;
+}
+
+.corrupted,
+.unidentified {
+	color: vars.$red;
+}
+
+.relic {
+	color: vars.$green;
+}
+
+.unmodifiable,
+.mirrored {
+	color: vars.$purple;
+}

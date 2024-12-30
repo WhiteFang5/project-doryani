@@ -1,6 +1,7 @@
 import { Color } from '@core/class/color.class';
 import { TradeItemLocation } from '@feature/stash-grid/type/stash-grid.type';
-import { Rectangle, UserSettings, Currency, AudioClipSettings } from '@shared/type';
+import { Currency } from '@shared/currency/type';
+import { Rectangle, UserSettings, AudioClipSettings } from '@shared/type';
 
 export const TradeNotificationPanelShortcutRef = 'trade-notifications-panel';
 

@@ -1,5 +1,6 @@
 import { Color } from '@core/class/color.class';
-import { ItemCategory, Rectangle, UserSettings } from '@shared/type';
+import { ItemCategory } from '@shared/item/type';
+import { Rectangle, UserSettings } from '@shared/type';
 
 export interface StashGridUserSettings extends UserSettings {
 	stashGridBounds: Rectangle[];

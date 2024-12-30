@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component, HostListener, Inject, OnDestroy, OnInit,
-    QueryList,
-    ViewChildren
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ElectronProvider } from '@core/provider';
 import { AppTranslateService, WindowService } from '@core/service';
 import { FEATURES_TOKEN } from '@core/token';
@@ -12,11 +7,10 @@ import { UserSettingsFormComponent } from '@feature/user-settings/component/user
 import { UserSettingsHelpComponent } from '@feature/user-settings/component/user-settings-help/user-settings-help.component';
 import { UserSettingsService } from '@feature/user-settings/service';
 import { IpcChannels } from '@ipc-consts';
-import { MaterialModule } from '@shared/material/material.module';
 import { PoEAccountService } from '@shared/poe-account/service/poe-account.service';
 import { ContextService } from '@shared/service';
 import { SharedModule } from '@shared/shared.module';
-import { Context, DEFAULT_USER_SETTINGS, FeatureModule, UserSettings, UserSettingsFeature } from '@shared/type';
+import { Context, FeatureModule, UserSettings, UserSettingsFeature } from '@shared/type';
 import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 
 @Component({
@@ -49,11 +43,14 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 		private readonly translate: AppTranslateService,
 		private readonly accountService: PoEAccountService,
 		private readonly electronProvider: ElectronProvider,
+		ngZone: NgZone,
 	) {
 		const ipcRenderer = this.electronProvider.provideIpcRenderer();
 		ipcRenderer.on(IpcChannels.WindowCloseReq, () => {
-			this.save().subscribe(() => {
-				ipcRenderer.send(IpcChannels.WindowCloseReq, true);
+			ngZone.run(() => {
+				this.save().subscribe(() => {
+					ipcRenderer.send(IpcChannels.WindowCloseReq, true);
+				});
 			});
 		});
 	}

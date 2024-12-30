@@ -30,7 +30,7 @@ export function register(app: App, ipcMain: IpcMain, screen: Screen, clipboard: 
 	});
 
 	ipcMain.on(IpcChannels.GetCursorScreenPoint, (event) => {
-		event.returnValue = screen.getCursorScreenPoint();
+		event.returnValue = screen.dipToScreenPoint(screen.getCursorScreenPoint());
 	});
 
 	ipcMain.on(IpcChannels.GetContentBounds, (event) => {
@@ -92,8 +92,10 @@ export function register(app: App, ipcMain: IpcMain, screen: Screen, clipboard: 
 		event.returnValue = clipboard.readText();
 	});
 
-	ipcMain.on(IpcChannels.SetClipboard, (event, text: string) => {
-		clipboard.writeText(text);
+	ipcMain.on(IpcChannels.SetClipboard, (event, text: string | undefined) => {
+		if (text) {
+			clipboard.writeText(text);
+		}
 		event.returnValue = true;
 	});
 

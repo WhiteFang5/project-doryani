@@ -24,7 +24,7 @@ export class WindowService {
 
 	public registerEvents(): void {
 		this.ipcRenderer.on(IpcChannels.GameBoundsChange, (_, bounds: Rectangle) => {
-			this.gameBounds.next(bounds);
+			this.ngZone.run(() => this.gameBounds.next(bounds));
 		});
 	}
 

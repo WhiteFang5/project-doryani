@@ -1,0 +1,57 @@
+@use './../../../../../styles/variables' as vars;
+
+.purpel {
+	color: vars.$purple;
+}
+
+.blue {
+	color: vars.$blue;
+}
+
+::ng-deep {
+	app-item-frame-stats {
+		.cold {
+			.value,
+			.value.changed {
+				color: vars.$aqua;
+
+				.text {
+					color: vars.$aqua !important;
+				}
+			}
+		}
+
+		.lightning {
+			.value,
+			.value.changed {
+				color: vars.$yellow;
+
+				.text {
+					color: vars.$yellow !important;
+				}
+			}
+		}
+
+		.chaos {
+			.value,
+			.value.changed {
+				color: vars.$pink;
+
+				.text {
+					color: vars.$pink !important;
+				}
+			}
+		}
+
+		.fire {
+			.value,
+			.value.changed {
+				color: vars.$red;
+
+				.text {
+					color: vars.$red !important;
+				}
+			}
+		}
+	}
+}

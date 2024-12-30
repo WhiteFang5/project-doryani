@@ -44,10 +44,10 @@ export namespace IpcChannels {
 	export const SetClipboard = "set-clipboard";
 	export const KeyTap = "key-tap";
 	export const KeyToggle = "key-toggle";
+	export const GetCursorScreenPoint = "get-cursor-screen-point";
 
 	// Electron App/Screen/Window Events
 	export const SetIgnoreMouseEvents = "set-ignore-mouse-events";
-	export const GetCursorScreenPoint = "get-cursor-screen-point";
 	export const GetContentBounds = "get-content-bounds";
 	export const GetBounds = "get-bounds";
 	export const GetZoomFactor = "get-zoom-factor";

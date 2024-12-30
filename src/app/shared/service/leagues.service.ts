@@ -18,7 +18,7 @@ export class LeaguesService {
 		return this.leaguesProvider.provide(language, cacheExpiration);
 	}
 
-	public get(leagueId: string, language?: Language): Observable<League | undefined> {
+	public get(leagueId: string | undefined, language?: Language): Observable<League | undefined> {
 		language = language || this.context.get().language;
 		return this.getLeagues(language).pipe(map((leagues) => leagues.find((l) => l.id === leagueId)));
 	}

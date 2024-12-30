@@ -11,6 +11,7 @@ import { AppTranslationsLoader } from './app/app-translations.loader';
 import { AppComponent } from './app/app.component';
 import { APP_CONFIG } from './environments/environment';
 import { CommandModule } from '@feature/command/command.module';
+import { EvaluateModule } from '@feature/evaluate/evaluate.module';
 
 const routes: Routes = [
 	{
@@ -46,6 +47,6 @@ bootstrapApplication(AppComponent, {
 		provideAnimations(),
 
 		// Features (Modules)
-		importProvidersFrom([BookmarkModule, CommandModule]),
+		importProvidersFrom([BookmarkModule, CommandModule, EvaluateModule]),
 	]
 }).catch(err => console.error(err));

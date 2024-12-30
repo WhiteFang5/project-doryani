@@ -165,7 +165,6 @@
     "stats-pp-cluster-jewels": "Post-Process Cluster Jewels",
     "stats-pp-cluster-jewels-tooltip": "Post-process Cluster Jewels and set threshold ranges for 'Item Level'' and 'Add # Passive Skills'",
     "stats-range": "Min-Max Range",
-    "stats-show-annointment-oils": "Show Annointment Oils",
     "stats-unique-check-all": "Unique Check All",
     "stats-unique-check-all-tooltip": "Auto-select all stats of Unique items",
     "switch": "switch amount",

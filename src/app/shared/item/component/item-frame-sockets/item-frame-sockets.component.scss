@@ -1,0 +1,74 @@
+@use './../../../../../styles/variables' as vars;
+
+.sockets {
+	position: relative;
+	width: 90px;
+	margin: 0 auto;
+
+	.link,
+	.socket {
+		position: absolute;
+		cursor: pointer;
+		user-select: none;
+		transition: all 0.2s ease-in-out;
+		background-repeat: no-repeat;
+
+		&.query {
+			background-color: rgba(170, 158, 130, 0.3);
+			outline-style: solid;
+			outline-width: 1px;
+			outline-color: vars.$light-dark-grey;
+		}
+	}
+
+	.link {
+		z-index: 1;
+		left: 9px;
+		margin-top: 20px;
+		width: 14px;
+		height: 30px;
+		background-image: url(../../../../../assets/poe2/item/link-vertical.png);
+
+		&.right {
+			left: 65px;
+		}
+
+		&.horizontal {
+			margin-top: 0;
+			left: 30px;
+			width: 30px;
+			height: 14px;
+			background-image: url(../../../../../assets/poe2/item/link-horizontal.png);
+		}
+	}
+
+	.socket {
+		width: 34px;
+		height: 34px;
+		line-height: 34px;
+		padding-right: 1px;
+		left: 0px;
+		z-index: 2;
+		color: vars.$white;
+
+		&.right {
+			left: 56px;
+		}
+
+		&.s {
+			background-image: url(../../../../../assets/poe2/item/socket.png);
+		}
+
+		&.d {
+			background-image: url(../../../../../assets/poe2/item/socket.png);
+		}
+
+		&.i {
+			background-image: url(../../../../../assets/poe2/item/socket.png);
+		}
+
+		&.g {
+			background-image: url(../../../../../assets/poe2/item/socket.png);
+		}
+	}
+}
