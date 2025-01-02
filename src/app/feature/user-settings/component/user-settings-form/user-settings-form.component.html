@@ -1,7 +1,7 @@
 <ng-container *ngIf="(account$ | async) as account">
 	<mat-card>
 		<mat-card-header>
-			{{'settings.poe-account' | translate}}
+			<mat-card-title>{{'settings.poe-account' | translate}}</mat-card-title>
 		</mat-card-header>
 		@if(account.loggedIn) {
 		<mat-card-content>
@@ -115,7 +115,7 @@
 	</mat-card>
 	<mat-card>
 		<mat-card-header>
-			{{'settings.game-settings' | translate}}
+			<mat-card-title>{{'settings.game-settings' | translate}}</mat-card-title>
 		</mat-card-header>
 		<mat-card-content class="user-settings-game-settings">
 			<mat-form-field>
@@ -146,7 +146,7 @@
 	</mat-card>
 	<mat-card>
 		<mat-card-header>
-			{{'settings.dialog' | translate}}
+			<mat-card-title>{{'settings.dialog' | translate}}</mat-card-title>
 		</mat-card-header>
 		<mat-card-content class="user-settings-dialog">
 			<mat-form-field>
@@ -177,7 +177,7 @@
 	</mat-card>
 	<mat-card>
 		<mat-card-header>
-			{{'settings.app' | translate}}
+			<mat-card-title>{{'settings.app' | translate}}</mat-card-title>
 		</mat-card-header>
 		<mat-card-content class="user-settings-app">
 			<mat-slide-toggle [checked]="settings.displayVersion" (change)="settings.displayVersion = $event.checked">

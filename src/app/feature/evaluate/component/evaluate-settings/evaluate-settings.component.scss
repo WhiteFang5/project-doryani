@@ -1,49 +1,70 @@
 @use './../../../../../styles/variables' as vars;
+@use '@angular/material' as mat;
 
-.toggle {
+:host {
 	display: flex;
-	flex-wrap: nowrap;
-	align-items: center;
+	flex-direction: column;
+	gap: 12px;
+}
 
-	> * {
-		width: 33.333%;
-		padding-right: 15px;
+.evaluate {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.name,
+.currencies,
+.layout,
+.filter {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	app-accelerator,
+	mat-form-field {
+		flex: 2;
 	}
+}
+
+.translate {
+	display: flex;
+	gap: 12px;
+}
+
+.query-sliders {
+	margin-top: 12px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
 }
 
 .profiles {
 	padding: 0;
 
-	> mat-label {
-		padding: 12px 0 0 12px;
-	}
+	@include mat.card-overrides((
+		// #232323 matches the default card background by default
+			elevated-container-color: color-mix(in srgb, #232323, #fff 5%)
+		));
 
-	.profile {
-		padding: 12px 12px 0px 12px;
-
-		.mat-card {
-			background-color: #2a2a2a;
+		.profile {
+			margin: 12px;
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
 		}
-	}
-}
-
-label {
-	display: block;
-	color: vars.$label-color;
-	font-size: 12px;
-	transform: perspective(100px) translateZ(0.001px);
 }
 
 .stat {
 	display: flex;
 	align-items: center;
 
-	> .text {
+	>.text {
 		overflow: hidden;
 		max-height: 38px;
 	}
 
-	> .type {
+	>.type {
 		display: inline-block;
 		padding: 3px;
 		margin-right: 6px;
@@ -76,13 +97,16 @@ label {
 }
 
 .value-range {
-	> .slider {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	.slider {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 
-		.mat-slider {
-			width: 100%;
+		mat-slider {
+			flex: 1;
 		}
 	}
 }
@@ -104,7 +128,7 @@ label {
 		}
 	}
 
-	.mat-slider {
+	mat-slider {
 		flex: 1;
 	}
 
@@ -112,4 +136,10 @@ label {
 		width: 80px;
 		text-align: center;
 	}
+}
+
+.toggles {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 12px;
 }

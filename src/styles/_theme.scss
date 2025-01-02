@@ -116,6 +116,9 @@ html {
 :root {
   @include mat.card-overrides((
 	title-text-size: 14px,
+	title-text-line-height: 22px,
+	subtitle-text-size: 12px,
+	subtitle-text-line-height: 19px,
     elevated-container-color: #{$light-bg-lighter-5},
   ));
 
