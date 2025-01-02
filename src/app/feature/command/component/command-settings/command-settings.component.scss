@@ -1,15 +1,15 @@
-.card {
-	position: relative;
-
-	.remove {
-		position: absolute;
-		top: 0;
-		right: 0;
-		z-index: 1;
-	}
+:host {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
 }
 
-.card-button {
-	padding: 16px;
-	width: 100%;
+::ng-deep {
+	.mat-mdc-tooltip {
+		white-space: pre-line;
+
+		&.width-450 .mat-mdc-tooltip-surface {
+			max-width: 450px;
+		}
+	}
 }

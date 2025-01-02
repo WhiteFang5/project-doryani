@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { EnumValues } from '@core/class/values.class';
 import { AppService, AppTranslateService, WindowService } from '@core/service';
-import { MaterialModule } from '@shared/material/material.module';
 import { PoEAccountService } from '@shared/poe-account/service/poe-account.service';
 import { PoEAccount, PoECharacter } from '@shared/poe-account/type';
 import { LeaguesService } from '@shared/service/leagues.service';
@@ -134,14 +133,6 @@ export class UserSettingsFormComponent implements OnInit, OnDestroy {
 
 	public onZoomChange(): void {
 		this.window.setZoom(this.settings.zoom! / 100);
-	}
-
-	public relaunchApp(): void {
-		this.app.quit(true);
-	}
-
-	public exitApp(): void {
-		this.app.quit(false);
 	}
 
 	public onLoginClick(): void {

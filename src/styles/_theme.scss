@@ -2,11 +2,6 @@
 @use './variables' as vars;
 @use 'sass:color';
 
-// @include mat.core();
-
-// $my-typography: mat.m2-define-typography-config();
-// @include mat.typography-hierarchy($my-typography);
-
 // Foreground Elements
 
 // Light Theme Text
@@ -28,39 +23,18 @@ $light-focused: rgba($light-primary-text, 0.12);
 // Background config
 // Light bg
 $light-background: #161616;
-$light-bg-darker-5: darken($light-background, 5%);
-$light-bg-darker-10: darken($light-background, 10%);
-$light-bg-darker-20: darken($light-background, 20%);
-$light-bg-darker-30: darken($light-background, 30%);
-$light-bg-lighter-5: lighten($light-background, 5%);
-$dark-bg-alpha-4: rgba(#161616, 0.04);
-$dark-bg-alpha-12: rgba(#161616, 0.12);
-
-// $mat-light-theme-background: (
-//   background: $light-background,
-//   status-bar: $light-bg-darker-20,
-//   app-bar: $light-bg-darker-5,
-//   hover: $dark-bg-alpha-4,
-//   card: $light-bg-lighter-5,
-//   dialog: $light-bg-lighter-5,
-//   disabled-button: $dark-bg-alpha-12,
-//   raised-button: $light-bg-lighter-5,
-//   focused-button: $dark-focused,
-//   selected-button: $light-bg-darker-20,
-//   selected-disabled-button: $light-bg-darker-30,
-//   disabled-button-toggle: $light-bg-darker-10,
-//   unselected-chip: $light-bg-darker-10,
-//   disabled-list-option: $light-bg-darker-10,
-// );
+$light-bg-darker-5: color.adjust($light-background, $lightness: -5%);
+$light-bg-darker-10: color.adjust($light-background, $lightness: -10%);
+$light-bg-darker-20: color.adjust($light-background, $lightness: -20%);
+$light-bg-darker-30: color.adjust($light-background, $lightness: -30%);
+$light-bg-lighter-5: color.adjust($light-background, $lightness: 5%);
 
 // Dark bg
 $dark-background: #161616;
-$dark-bg-lighter-5: lighten($dark-background, 5%);
-$dark-bg-lighter-10: lighten($dark-background, 10%);
-$dark-bg-lighter-20: lighten($dark-background, 20%);
-$dark-bg-lighter-30: lighten($dark-background, 30%);
-$light-bg-alpha-4: rgba(#161616, 0.04);
-$light-bg-alpha-12: rgba(#161616, 0.12);
+$dark-bg-lighter-5: color.adjust($dark-background, $lightness: 5%);
+$dark-bg-lighter-10: color.adjust($dark-background, $lightness: 10%);
+$dark-bg-lighter-20: color.adjust($dark-background, $lightness: 20%);
+$dark-bg-lighter-30: color.adjust($dark-background, $lightness: 30%);
 
 
 // Theme Config
@@ -136,27 +110,37 @@ $altTheme: mat.m2-define-dark-theme((color: (primary: $theme-primary, accent: $t
 html {
 	color: $dark-text;
 	font-size: 14px;
-
-	--mdc-elevated-card-container-color: #{$light-bg-lighter-5};
-	--mdc-filled-text-field-container-color: transparent;
-	--mdc-filled-text-field-disabled-container-color: transparent;
-	--mat-select-trigger-text-size: 14px;
-	--mdc-filled-text-field-label-text-size: 14px;
 }
 
-// Specific component overrides, pieces that are not in line with the general theming
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.card-overrides((
+	title-text-size: 14px,
+	title-text-line-height: 22px,
+	subtitle-text-size: 12px,
+	subtitle-text-line-height: 19px,
+    elevated-container-color: #{$light-bg-lighter-5},
+  ));
 
-// Handle buttons appropriately, with respect to line-height
-.mat-mdc-raised-button,
-.mat-mdc-stroked-button,
-.mat-mdc-flat-button {
-	padding: 0 1.15em;
-	margin: 0 0.65em;
-	min-width: 3em;
-	line-height: 36.4px;
-}
+  @include mat.tooltip-overrides((
+    supporting-text-size: 10px,
+  ));
 
-.mat-mdc-standard-chip {
-	padding: 0.5em 0.85em;
-	min-height: 2.5em;
+  @include mat.form-field-overrides((
+    filled-container-color: transparent,
+	filled-disabled-container-color: transparent,
+	hover-state-layer-opacity: 0,
+	focus-state-layer-opacity: 0,
+  ));
+
+  @include mat.slide-toggle-overrides((
+	selected-track-color: #{$accent-lighter},
+	selected-hover-track-color: #{$accent-lighter},
+	selected-focus-track-color: #{$accent-lighter},
+	selected-pressed-track-color: #{$accent-lighter},
+  ));
+
+  @include mat.tooltip-overrides((
+	supporting-text-size: 12px,
+  ));
 }

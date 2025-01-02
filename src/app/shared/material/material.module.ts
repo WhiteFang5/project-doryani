@@ -19,11 +19,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { AcceleratorComponent } from './component/accelerator/accelerator.component';
-import { CardComponent } from './component/card/card.component';
 import { SelectListComponent } from './component/select-list/select-list.component';
 import { AlphaColorDirective } from './directive/alpha-color.directive';
 import { DragDirective } from './directive/drag.directive';
 import { ResizeDragDirective } from './directive/resize-drag.directive';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { CardComponent } from './component/card/card.component';
 
 @NgModule({
 	imports: [
@@ -85,5 +86,8 @@ import { ResizeDragDirective } from './directive/resize-drag.directive';
 		ResizeDragDirective,
 		AlphaColorDirective,
 	],
+	providers: [
+		{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic' } }
+	]
 })
 export class MaterialModule { }

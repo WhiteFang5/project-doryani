@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'app-card',
 	templateUrl: './card.component.html',

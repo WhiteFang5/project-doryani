@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, Inject, NgZone, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ElectronProvider } from '@core/provider';
-import { AppTranslateService, WindowService } from '@core/service';
+import { AppService, AppTranslateService, WindowService } from '@core/service';
 import { FEATURES_TOKEN } from '@core/token';
 import { UserSettingsFeatureContainerComponent } from '@feature/user-settings/component/user-settings-feature-container/user-settings-feature-container.component';
 import { UserSettingsFormComponent } from '@feature/user-settings/component/user-settings-form/user-settings-form.component';
@@ -44,6 +44,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 		private readonly accountService: PoEAccountService,
 		private readonly electronProvider: ElectronProvider,
 		ngZone: NgZone,
+		private readonly app: AppService,
 	) {
 		const ipcRenderer = this.electronProvider.provideIpcRenderer();
 		ipcRenderer.on(IpcChannels.WindowCloseReq, () => {
@@ -80,6 +81,14 @@ export class UserSettingsComponent implements OnInit, OnDestroy {
 		this.save().subscribe(() => {
 			this.window.close();
 		});
+	}
+
+	public relaunchApp(): void {
+		this.app.quit(true);
+	}
+
+	public exitApp(): void {
+		this.app.quit(false);
 	}
 
 	private init(): void {

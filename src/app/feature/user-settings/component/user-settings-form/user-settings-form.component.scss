@@ -1,44 +1,59 @@
 @use './../../../../../styles/variables' as vars;
 
-app-card {
-	.card, button {
-		background-color: vars.$settings-grey-one;
-	}
+:host {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
 
-	.card {
-		height: 100%;
+.user-settings-login {
+	display: flex;
+	gap: 32px;
+	align-items: center;
 
-		button {
-			background-color: vars.$settings-grey-two;
-		}
+	>mat-form-field {
+		max-width: 250px
 	}
 }
 
-label {
-	display: block;
-	color: vars.$label-color;
-	font-size: 12px;
-	transform: perspective(100px) translateZ(0.001px);
+.user-settings-game-settings {
+	display: flex;
+	align-items: baseline;
+	gap: 16px;
+}
+
+.user-settings-dialog {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+
+	>mat-form-field {
+		flex: 1;
+	}
 }
 
 .value-range {
-	> .slider {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	.slider {
 		display: flex;
 		align-items: center;
-		justify-content: center;
 
-		.mat-slider {
-			width: 100%;
+		mat-slider {
+			flex: 1;
 		}
 	}
+}
+
+.user-settings-app {
+	padding-top: 12px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px 16px;
 }
 
 .warning {
 	color: vars.$orange;
-}
-
-::ng-deep {
-	.mat-tooltip-lighter {
-		background-color: vars.$settings-grey-two;
-	}
 }
