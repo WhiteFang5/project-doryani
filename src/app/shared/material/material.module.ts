@@ -24,6 +24,7 @@ import { AlphaColorDirective } from './directive/alpha-color.directive';
 import { DragDirective } from './directive/drag.directive';
 import { ResizeDragDirective } from './directive/resize-drag.directive';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { CardComponent } from './component/card/card.component';
 
 @NgModule({
 	imports: [
@@ -73,6 +74,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 		AcceleratorComponent,
 		SelectListComponent,
 		DragDirective,
+		CardComponent,
 		ResizeDragDirective,
 		AlphaColorDirective,
 	],
@@ -80,6 +82,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 		AcceleratorComponent,
 		SelectListComponent,
 		DragDirective,
+		CardComponent,
 		ResizeDragDirective,
 		AlphaColorDirective,
 	],

@@ -47,6 +47,7 @@
 		"@angular/platform-browser-dynamic": "^19.0.0",
 		"@angular/router": "^19.0.0",
 		"@ngx-translate/core": "^16.0.3",
+		"bootstrap": "^5.3.3",
 		"electron-log": "^5.2.4",
 		"get-windows": "^9.2.0",
 		"localforage": "^1.10.0",
