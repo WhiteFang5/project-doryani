@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { EvaluateOptions, ItemSearchIndexed } from '@feature/evaluate/type';
 import { LeaguesService } from '@shared/service';
 import { SharedModule } from '@shared/shared.module';
-import { League } from '@shared/type';
 import { Observable, map } from 'rxjs';
 
-type LeagueMap = Record<string, League>;
+type LeagueMap = Record<string, string>;
 
 @Component({
 	selector: 'app-evaluate-options',
@@ -37,7 +36,7 @@ export class EvaluateOptionsComponent implements OnInit {
 			map((leagues) => {
 				const result: LeagueMap = {};
 				leagues.forEach((league) => {
-					result[league.id] = league;
+					result[league.id] = league.text;
 				});
 				return result;
 			})

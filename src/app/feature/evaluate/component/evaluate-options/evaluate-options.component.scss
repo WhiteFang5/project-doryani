@@ -1,4 +1,12 @@
 @use './../../../../../styles/variables' as vars;
+@use '@angular/material' as mat;
+
+:host {
+	@include mat.icon-button-overrides((icon-size: 24px,
+		));
+
+	@include mat.icon-button-density(-4);
+}
 
 .options {
 	position: absolute;
@@ -37,16 +45,17 @@
 	}
 }
 
-.mat-icon-button {
-	height: 24px;
-	width: 24px;
-	line-height: 24px;
-}
-
 .button-text {
 	font-family: FontinSmallCaps;
 }
 
-.mat-slide-toggle {
+.mat-mdc-slide-toggle {
 	margin-bottom: 0;
+}
+
+// todo rename this
+.fake-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
 }

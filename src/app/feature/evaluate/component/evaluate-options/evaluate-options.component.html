@@ -4,7 +4,7 @@
 		<!-- league -->
 		<ng-container *ngIf="options.leagueId">
 			<ng-container *ngIf="leagues$ | async as leagues">
-				<div class="row">
+				<div class="fake-row">
 					<button mat-icon-button (click)="changeLeague(-1, leagues)">
 						<mat-icon>keyboard_arrow_left</mat-icon>
 					</button>
@@ -27,7 +27,7 @@
 		</mat-slide-toggle>
 		<!-- indexed -->
 		<ng-container *ngIf="options.indexed">
-			<div class="row">
+			<div class="fake-row">
 				<button mat-icon-button (click)="changeIndex(-1)">
 					<mat-icon>keyboard_arrow_left</mat-icon>
 				</button>

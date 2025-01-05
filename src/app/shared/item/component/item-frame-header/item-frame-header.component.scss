@@ -3,16 +3,18 @@
 .header {
 	font-size: 19px;
 	line-height: 1em;
-	height: 33px;
+	height: 53px;
 	padding: 0px 20px;
 
 	.name {
-		padding: 7.23428px 0px;
 		white-space: nowrap;
 	}
 
 	.center-bg {
 		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	&.double {

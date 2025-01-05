@@ -161,7 +161,7 @@ export class EvaluateSettingsComponent implements UserSettingsComponent {
 					currencies.find((currency) => currency.id === id)
 				);
 				if (this.settings.evaluateCurrencyIds.length <= 0) {
-					this.settings.evaluateCurrencyIds = [currencies[0].id];
+					this.settings.evaluateCurrencyIds = [currencies[0]?.id];
 				}
 			}
 			this.currencies$.next(currencies);
